@@ -37,9 +37,9 @@ function InvoiceCreate() {
         ]);
     };
 
-    const subtotal = items.reduce((sum, item) => sum + item.total, 0);
-    const tax = subtotal * 0.18; // 18% GST
-    const grandTotal = subtotal + tax;
+    // const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+    // const tax = subtotal * 0.18; // 18% GST
+    const grandTotal = items.reduce((sum, item) => sum + item.total, 0);
 
     const today = new Date().toLocaleDateString();
     const invoiceNumber = "INV-" + Date.now();
@@ -47,7 +47,7 @@ function InvoiceCreate() {
     const downloadPDF = async () => {
         const element = pdfRef.current;
 
-        const canvas = await html2canvas(element, { 
+        const canvas = await html2canvas(element, {
             scale: 2,
             backgroundColor: '#ffffff'
         });
@@ -156,14 +156,14 @@ function InvoiceCreate() {
 
                 {/* Totals */}
                 <div className="totals-section">
-                    <div className="total-row">
+                    {/* <div className="total-row">
                         <span>Subtotal:</span>
                         <span>₹ {subtotal.toFixed(2)}</span>
-                    </div>
-                    <div className="total-row">
+                    </div> */}
+                    {/* <div className="total-row">
                         <span>Tax (18% GST):</span>
                         <span>₹ {tax.toFixed(2)}</span>
-                    </div>
+                    </div> */}
                     <div className="grand-total">
                         <span>Grand Total:</span>
                         <span>₹ {grandTotal.toFixed(2)}</span>
@@ -254,8 +254,8 @@ function InvoiceCreate() {
 
                     {/* PDF Totals */}
                     <div className="pdf-totals">
-                        <div className="pdf-subtotal">Subtotal: ₹ {subtotal.toFixed(2)}</div>
-                        <div className="pdf-tax">Tax (18% GST): ₹ {tax.toFixed(2)}</div>
+                        {/* <div className="pdf-subtotal">Subtotal: ₹ {subtotal.toFixed(2)}</div> */}
+                        {/* <div className="pdf-tax">Tax (18% GST): ₹ {tax.toFixed(2)}</div> */}
                         <div className="pdf-grand-total">Grand Total: ₹ {grandTotal.toFixed(2)}</div>
                     </div>
 
