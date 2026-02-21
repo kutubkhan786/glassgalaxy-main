@@ -64,8 +64,9 @@
 }
 
 .company-logo {
-    width: 60px;
+    width: 150px;
     height: auto;
+    border-radius: 15px;
 }
 
 .company-details h2 {
@@ -270,15 +271,19 @@
     margin-top: 5px;
 }
 
+
 .pdf-title {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: bold;
     letter-spacing: 2px;
     margin-bottom: 5px;
+    margin-left: 10px;
+    margin-top: 20px;
 }
 
 .pdf-subtitle {
-    font-size: 16px;
+    font-size: 14px;
+    margin-left: 10px;
     color: #666;
 }
 

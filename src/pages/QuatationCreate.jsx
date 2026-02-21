@@ -205,9 +205,10 @@ function QuotationCreate() {
                 <div className="quotation-container pdf-layout" ref={pdfRef}>
                     {/* PDF Header with QUOTATION */}
                     <div className="pdf-header">
-                        <div className="pdf-left">
-                            <div className="pdf-title">GLASS GALAXY</div>
-                            <div className="pdf-subtitle">We Deal In All Types Of Glass And Fabrication Works</div>
+                        <img src={logo} alt="Glass Galaxy Logo" className="company-logo" />
+                        <div className="pdf-left" >
+                            <div className="pdf-title" >GLASS GALAXY</div>
+                            <div className="pdf-subtitle" >We Deal In All Types Of Glass And Fabrication Works</div>
                         </div>
                         <div className="pdf-right">
                             <div className="quotation-label">QUOTATION</div>

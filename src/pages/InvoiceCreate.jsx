@@ -185,6 +185,7 @@ function InvoiceCreate() {
                 <div className="invoice-container pdf-layout" ref={pdfRef}>
                     {/* PDF Header with INVOICE */}
                     <div className="pdf-header">
+                        <img src={logo} alt="Glass Galaxy Logo" className="company-logo" />
                         <div className="pdf-left">
                             <div className="pdf-title">GLASS GALAXY</div>
                             <div className="pdf-subtitle">We Deal In All Types Of Glass And Fabrication Works</div>
