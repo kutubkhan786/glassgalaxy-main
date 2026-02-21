@@ -1,5 +1,5 @@
-/* Invoice Wrapper */
-.invoice-wrapper {
+/* Quotation Wrapper */
+.quotation-wrapper {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
@@ -44,8 +44,8 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Invoice Header with INVOICE on right */
-.invoice-header {
+/* Quotation Header with QUOTATION on right */
+.quotation-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -80,12 +80,12 @@
     color: #666;
 }
 
-.invoice-top-right {
+.quotation-top-right {
     text-align: right;
     min-width: 150px;
 }
 
-.invoice-label {
+.quotation-label {
     font-size: 28px;
     font-weight: bold;
     letter-spacing: 2px;
@@ -93,13 +93,12 @@
     line-height: 1.2;
 }
 
-.invoice-number {
+.quotation-number {
     font-size: 14px;
     color: #666;
     margin-top: 5px;
     font-weight: 500;
 }
-
 
 /* From and To Sections */
 .from-section,
@@ -112,7 +111,8 @@
 
 .from-section h3,
 .to-section h3,
-.items-section h3 {
+.items-section h3,
+.terms-section h3 {
     margin: 0 0 10px;
     font-size: 14px;
     font-weight: bold;
@@ -138,6 +138,31 @@
 .to-section input:focus {
     outline: none;
     border-color: #000;
+}
+
+/* Validity Section */
+.validity-section {
+    margin-bottom: 20px;
+}
+
+.validity-box {
+    background: #e8f4fd;
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #2196F3;
+}
+
+.validity-label {
+    font-weight: bold;
+    color: #1976D2;
+}
+
+.validity-date {
+    font-weight: 600;
+    color: #0d47a1;
 }
 
 /* Items Section */
@@ -204,6 +229,26 @@
     color: #000;
 }
 
+/* Terms Section */
+.terms-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff3e0;
+    border-radius: 8px;
+    border-left: 4px solid #ff9800;
+}
+
+.terms-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.terms-list li {
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #555;
+}
+
 /* Signature Section */
 .signature-section {
     display: flex;
@@ -252,22 +297,28 @@
 
 .pdf-right {
     text-align: right;
-    min-width: 200px;
+    min-width: 250px;
 }
 
-.pdf-right .invoice-label {
+.pdf-right .quotation-label {
     font-size: 36px;
 }
 
-.pdf-right .invoice-number {
+.pdf-right .quotation-number {
     font-size: 16px;
     margin-top: 5px;
 }
 
-.invoice-date {
+.quotation-date,
+.valid-until {
     font-size: 14px;
     color: #666;
     margin-top: 5px;
+}
+
+.valid-until {
+    color: #1976D2;
+    font-weight: 500;
 }
 
 .pdf-title {
@@ -322,7 +373,7 @@
 /* PDF Totals */
 .pdf-totals {
     text-align: right;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     padding: 20px;
     background: #f9f9f9;
     border-radius: 5px;
@@ -342,11 +393,38 @@
     border-top: 2px solid #000;
 }
 
+/* PDF Terms */
+.pdf-terms {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff3e0;
+    border-radius: 5px;
+    border-left: 4px solid #ff9800;
+}
+
+.pdf-terms h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.pdf-terms-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.pdf-terms-list li {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #666;
+}
+
 /* PDF Signatures */
 .pdf-signatures {
     display: flex;
     justify-content: space-between;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .pdf-signature {
@@ -369,6 +447,17 @@
     margin: 10px 0;
 }
 
+/* PDF Footer Note */
+.pdf-footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: #999;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+    font-style: italic;
+}
+
 /* Hide PDF layout by default */
 .hidden-pdf {
     position: absolute;
@@ -378,7 +467,7 @@
 
 /* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
-    .invoice-wrapper {
+    .quotation-wrapper {
         padding: 10px;
     }
 
@@ -390,7 +479,7 @@
         width: 100%;
     }
 
-    .invoice-header {
+    .quotation-header {
         flex-direction: column;
     }
 
@@ -400,19 +489,15 @@
         text-align: center;
     }
 
-    .invoice-top-right {
+    .quotation-top-right {
         width: 100%;
         text-align: left;
         border-top: 1px solid #eee;
         padding-top: 10px;
     }
 
-    .invoice-label {
-        font-size: 28px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        color: #000;
-        line-height: 1.2;
+    .quotation-label {
+        font-size: 24px;
     }
 
     .item-fields {
@@ -431,6 +516,12 @@
     .signature-box {
         width: 100%;
     }
+
+    .validity-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
 }
 
 /* Small phones */
@@ -444,11 +535,15 @@
         font-size: 14px;
     }
 
-    .invoice-label {
+    .quotation-label {
         font-size: 22px;
     }
 
-    .invoice-number {
+    .quotation-number {
+        font-size: 12px;
+    }
+
+    .terms-list li {
         font-size: 12px;
     }
 }

@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Background */
+.dashboard-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2b46, #0a1d30);
+}
+
+/* Card */
+.dashboard-card {
+  background: white;
+  padding: 50px;
+  border-radius: 12px;
+  text-align: center;
+  width: 400px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-logo {
+  width: 90px;
+  margin-bottom: 15px;
+}
+
+.dashboard-card h1 {
+  margin: 0;
+  letter-spacing: 3px;
+  color: #0f2b46;
+}
+
+.dashboard-card p {
+  margin-bottom: 30px;
+  color: #555;
+}
+
+/* Buttons */
+.dashboard-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dashboard-btn {
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.invoice-btn {
+  background: #0f2b46;
+  color: white;
+}
+
+.quotation-btn {
+  background: #d4af37;
+  color: black;
+}
+
+.dashboard-btn:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  .dashboard-card {
+    width: 90%;
+    padding: 30px;
+  }
+}

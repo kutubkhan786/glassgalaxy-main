@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import "../styles/invoice.css";
+import "../styles/quotation.css";
 import logo from "/gglogo.png";
 
-function InvoiceCreate() {
+function QuotationCreate() {
     const pdfRef = useRef();
 
     const [items, setItems] = useState([
@@ -42,12 +42,13 @@ function InvoiceCreate() {
     const grandTotal = subtotal + tax;
 
     const today = new Date().toLocaleDateString();
-    const invoiceNumber = "INV-" + Date.now();
+    const quotationNumber = "QTN-" + Date.now();
+    const validUntil = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString(); // 7 days validity
 
     const downloadPDF = async () => {
         const element = pdfRef.current;
 
-        const canvas = await html2canvas(element, { 
+        const canvas = await html2canvas(element, {
             scale: 2,
             backgroundColor: '#ffffff'
         });
@@ -58,11 +59,11 @@ function InvoiceCreate() {
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        pdf.save(`${invoiceNumber}.pdf`);
+        pdf.save(`${quotationNumber}.pdf`);
     };
 
     return (
-        <div className="invoice-wrapper">
+        <div className="quotation-wrapper">
             {/* Buttons */}
             <div className="action-buttons">
                 <button onClick={addRow} className="btn-primary">+ Add Item</button>
@@ -70,9 +71,9 @@ function InvoiceCreate() {
             </div>
 
             {/* Mobile Responsive UI for Data Entry */}
-            <div className="invoice-container mobile-entry">
-                {/* Header with Logo and INVOICE */}
-                <div className="invoice-header">
+            <div className="quotation-container mobile-entry">
+                {/* Header with Logo and QUOTATION */}
+                <div className="quotation-header">
                     <div className="company-info">
                         <img src={logo} alt="Glass Galaxy Logo" className="company-logo" />
                         <div className="company-details">
@@ -80,9 +81,9 @@ function InvoiceCreate() {
                             <p className="tagline">We Deal In All Types Of Glass And Fabrication Works</p>
                         </div>
                     </div>
-                    <div className="invoice-top-right">
-                        <div className="invoice-label">INVOICE</div>
-                        <div className="invoice-number">{invoiceNumber}</div>
+                    <div className="quotation-top-right">
+                        <div className="quotation-label">QUOTATION</div>
+                        <div className="quotation-number">{quotationNumber}</div>
                     </div>
                 </div>
 
@@ -116,6 +117,14 @@ function InvoiceCreate() {
                         value={customer.phone}
                         onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
                     />
+                </div>
+
+                {/* Validity Info */}
+                <div className="validity-section">
+                    <div className="validity-box">
+                        <span className="validity-label">Valid Until:</span>
+                        <span className="validity-date">{validUntil}</span>
+                    </div>
                 </div>
 
                 {/* Items Table - Mobile Optimized */}
@@ -170,6 +179,17 @@ function InvoiceCreate() {
                     </div>
                 </div>
 
+                {/* Terms and Conditions */}
+                <div className="terms-section">
+                    <h3>TERMS & CONDITIONS:</h3>
+                    <ul className="terms-list">
+                        <li>This quotation is valid for 7 days</li>
+                        <li>50% advance payment required</li>
+                        <li>Installation within 7-10 working days</li>
+                        <li>GST extra as applicable</li>
+                    </ul>
+                </div>
+
                 {/* Signatures */}
                 <div className="signature-section">
                     <div className="signature-box">
@@ -183,19 +203,20 @@ function InvoiceCreate() {
                 </div>
             </div>
 
-            {/* Desktop Layout for PDF - Matches Image */}
+            {/* Desktop Layout for PDF - Professional Quotation Format */}
             <div className="hidden-pdf">
-                <div className="invoice-container pdf-layout" ref={pdfRef}>
-                    {/* PDF Header with INVOICE */}
+                <div className="quotation-container pdf-layout" ref={pdfRef}>
+                    {/* PDF Header with QUOTATION */}
                     <div className="pdf-header">
                         <div className="pdf-left">
                             <div className="pdf-title">GLASS GALAXY</div>
                             <div className="pdf-subtitle">We Deal In All Types Of Glass And Fabrication Works</div>
                         </div>
                         <div className="pdf-right">
-                            <div className="invoice-label">INVOICE</div>
-                            <div className="invoice-number">{invoiceNumber}</div>
-                            <div className="invoice-date">Date: {today}</div>
+                            <div className="quotation-label">QUOTATION</div>
+                            <div className="quotation-number">{quotationNumber}</div>
+                            <div className="quotation-date">Date: {today}</div>
+                            <div className="valid-until">Valid Until: {validUntil}</div>
                         </div>
                     </div>
 
@@ -259,6 +280,19 @@ function InvoiceCreate() {
                         <div className="pdf-grand-total">Grand Total: ₹ {grandTotal.toFixed(2)}</div>
                     </div>
 
+                    {/* Terms and Conditions */}
+                    <div className="pdf-terms">
+                        <h4>TERMS & CONDITIONS:</h4>
+                        <ul className="pdf-terms-list">
+                            <li>This quotation is valid for 7 days from the date of issue</li>
+                            <li>50% advance payment is required to confirm the order</li>
+                            <li>Installation will be completed within 7-10 working days</li>
+                            <li>GST @ 18% is included in the total amount</li>
+                            <li>Material quality guaranteed as per sample</li>
+                            <li>This is a computer generated quotation, signature not required</li>
+                        </ul>
+                    </div>
+
                     {/* PDF Signatures */}
                     <div className="pdf-signatures">
                         <div className="pdf-signature">
@@ -271,10 +305,15 @@ function InvoiceCreate() {
                             <div className="signature-label">Authorized Signature</div>
                         </div>
                     </div>
+
+                    {/* Footer Note */}
+                    <div className="pdf-footer-note">
+                        * This is a quotation only. Prices subject to change without notice.
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default InvoiceCreate;
+export default QuotationCreate;
