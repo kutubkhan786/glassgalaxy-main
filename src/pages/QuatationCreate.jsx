@@ -65,10 +65,7 @@ function QuotationCreate() {
     return (
         <div className="quotation-wrapper">
             {/* Buttons */}
-            <div className="action-buttons">
-                <button onClick={addRow} className="btn-primary">+ Add Item</button>
-                <button onClick={downloadPDF} className="btn-secondary">Download PDF</button>
-            </div>
+
 
             {/* Mobile Responsive UI for Data Entry */}
             <div className="quotation-container mobile-entry">
@@ -311,6 +308,10 @@ function QuotationCreate() {
                         * This is a quotation only. Prices subject to change without notice.
                     </div>
                 </div>
+            </div>
+            <div className="action-buttons">
+                <button onClick={addRow} className="btn-primary">+ Add Item</button>
+                <button onClick={downloadPDF} className="btn-secondary">Download PDF</button>
             </div>
         </div>
     );

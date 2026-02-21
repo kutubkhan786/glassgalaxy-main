@@ -64,10 +64,7 @@ function InvoiceCreate() {
     return (
         <div className="invoice-wrapper">
             {/* Buttons */}
-            <div className="action-buttons">
-                <button onClick={addRow} className="btn-primary">+ Add Item</button>
-                <button onClick={downloadPDF} className="btn-secondary">Download PDF</button>
-            </div>
+
 
             {/* Mobile Responsive UI for Data Entry */}
             <div className="invoice-container mobile-entry">
@@ -272,6 +269,11 @@ function InvoiceCreate() {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="action-buttons">
+                <button onClick={addRow} className="btn-primary">+ Add Item</button>
+                <button onClick={downloadPDF} className="btn-secondary">Download PDF</button>
             </div>
         </div>
     );
