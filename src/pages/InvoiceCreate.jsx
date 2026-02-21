@@ -37,7 +37,9 @@ function InvoiceCreate() {
         ]);
     };
 
-    const grandTotal = items.reduce((sum, item) => sum + item.total, 0);
+    const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+    const tax = subtotal * 0.18; // 18% GST
+    const grandTotal = subtotal + tax;
 
     const today = new Date().toLocaleDateString();
     const invoiceNumber = "INV-" + Date.now();
@@ -45,7 +47,10 @@ function InvoiceCreate() {
     const downloadPDF = async () => {
         const element = pdfRef.current;
 
-        const canvas = await html2canvas(element, { scale: 2 });
+        const canvas = await html2canvas(element, { 
+            scale: 2,
+            backgroundColor: '#ffffff'
+        });
         const imgData = canvas.toDataURL("image/png");
 
         const pdf = new jsPDF("p", "mm", "a4");
@@ -57,198 +62,198 @@ function InvoiceCreate() {
     };
 
     return (
-        <div>
+        <div className="invoice-wrapper">
             {/* Buttons */}
             <div className="action-buttons">
-                <button onClick={addRow}>+ Add Item</button>
-                <button onClick={downloadPDF}>Download PDF</button>
+                <button onClick={addRow} className="btn-primary">+ Add Item</button>
+                <button onClick={downloadPDF} className="btn-secondary">Download PDF</button>
             </div>
 
-            {/* Visible Responsive Layout */}
-            <div className="invoice-container">
+            {/* Mobile Responsive UI for Data Entry */}
+            <div className="invoice-container mobile-entry">
+                {/* Header with Logo and Title */}
                 <div className="invoice-header">
                     <div className="company-info">
                         <img src={logo} alt="Glass Galaxy Logo" className="company-logo" />
-                        <h2>Glass Galaxy</h2>
-                        <p>GST No: ____________</p>
-                        <p>Phone: ____________</p>
-                    </div>
-
-                    <div style={{ textAlign: "right" }}>
-                        <div className="invoice-title">INVOICE</div>
-                        <p>Invoice No: {invoiceNumber}</p>
-                        <p>Date: {today}</p>
+                        <div className="company-details">
+                            <h2>GLASS GALAXY</h2>
+                            <p className="tagline">We Deal In All Types Of Glass And Fabrication Works</p>
+                        </div>
                     </div>
                 </div>
 
-                <div className="section-box">
-                    <h3>From:</h3>
+                {/* From Section */}
+                <div className="from-section">
+                    <h3>FROM:</h3>
                     <p>Glass Galaxy</p>
-                    <p>Dwarka, Nashik</p>
+                    <p>Dwarka, Nashik, Maharashtra</p>
                     <p>+91 866899322</p>
+                    <p>kutubmerchant598@gmail.com</p>
                 </div>
 
-                <div className="section-box">
-                    <h3>To:</h3>
+                {/* To Section */}
+                <div className="to-section">
+                    <h3>TO:</h3>
                     <input
+                        type="text"
                         placeholder="Customer Name"
                         value={customer.name}
-                        onChange={(e) =>
-                            setCustomer({ ...customer, name: e.target.value })
-                        }
+                        onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
                     />
                     <input
+                        type="text"
                         placeholder="Customer Address"
                         value={customer.address}
-                        onChange={(e) =>
-                            setCustomer({ ...customer, address: e.target.value })
-                        }
+                        onChange={(e) => setCustomer({ ...customer, address: e.target.value })}
                     />
                     <input
+                        type="text"
                         placeholder="Customer Phone"
                         value={customer.phone}
-                        onChange={(e) =>
-                            setCustomer({ ...customer, phone: e.target.value })
-                        }
+                        onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
                     />
                 </div>
 
-                <table className="invoice-table">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Size</th>
-                            <th>Sq.ft</th>
-                            <th>Rate</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {items.map((row, index) => (
-                            <tr key={index}>
-                                <td>
-                                    <input
-                                        value={row.item}
-                                        onChange={(e) =>
-                                            handleChange(index, "item", e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        value={row.size}
-                                        onChange={(e) =>
-                                            handleChange(index, "size", e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        value={row.sqft}
-                                        onChange={(e) =>
-                                            handleChange(index, "sqft", e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        value={row.rate}
-                                        onChange={(e) =>
-                                            handleChange(index, "rate", e.target.value)
-                                        }
-                                    />
-                                </td>
-                                <td>{row.total}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <div className="total-section">
-                    Grand Total: ₹ {grandTotal}
+                {/* Items Table - Mobile Optimized */}
+                <div className="items-section">
+                    <h3>ITEMS</h3>
+                    {items.map((row, index) => (
+                        <div key={index} className="mobile-item-row">
+                            <div className="item-fields">
+                                <input
+                                    placeholder="Item"
+                                    value={row.item}
+                                    onChange={(e) => handleChange(index, "item", e.target.value)}
+                                />
+                                <input
+                                    placeholder="Size"
+                                    value={row.size}
+                                    onChange={(e) => handleChange(index, "size", e.target.value)}
+                                />
+                            </div>
+                            <div className="item-fields">
+                                <input
+                                    type="number"
+                                    placeholder="Sq.ft"
+                                    value={row.sqft}
+                                    onChange={(e) => handleChange(index, "sqft", e.target.value)}
+                                />
+                                <input
+                                    type="number"
+                                    placeholder="Rate (₹)"
+                                    value={row.rate}
+                                    onChange={(e) => handleChange(index, "rate", e.target.value)}
+                                />
+                                <div className="item-total">₹ {row.total}</div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
-                <div className="signature">
-                    <div className="signature-box">Customer Signature</div>
-                    <div className="signature-box">Authorized Signature</div>
+                {/* Totals */}
+                <div className="totals-section">
+                    <div className="total-row">
+                        <span>Subtotal:</span>
+                        <span>₹ {subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="total-row">
+                        <span>Tax (18% GST):</span>
+                        <span>₹ {tax.toFixed(2)}</span>
+                    </div>
+                    <div className="grand-total">
+                        <span>Grand Total:</span>
+                        <span>₹ {grandTotal.toFixed(2)}</span>
+                    </div>
                 </div>
 
-                <div className="invoice-footer">
-                    +91 866899322 | Address: Dwarka Nashik |
-                    Email: kutubmerchant598@gmail.com
+                {/* Signatures */}
+                <div className="signature-section">
+                    <div className="signature-box">
+                        <p>Customer Signature</p>
+                        <div className="signature-line"></div>
+                    </div>
+                    <div className="signature-box">
+                        <p>Authorized Signature</p>
+                        <div className="signature-line"></div>
+                    </div>
                 </div>
             </div>
 
-            {/* Hidden Desktop Layout for PDF */}
+            {/* Desktop Layout for PDF - Matches Image */}
             <div className="hidden-pdf">
                 <div className="invoice-container pdf-layout" ref={pdfRef}>
-                    <div className="invoice-header">
-                        <div className="company-info">
-                            <img src={logo} alt="Glass Galaxy Logo" className="company-logo" />
-                            <p>GST No: ____________</p>
-                            <p>Phone: ____________</p>
+                    <div className="pdf-header">
+                        <div className="pdf-title">GLASS GALAXY</div>
+                        <div className="pdf-subtitle">We Deal In All Types Of Glass And Fabrication Works</div>
+                    </div>
+
+                    <div className="pdf-from-to">
+                        <div className="pdf-from">
+                            <strong>FROM:</strong><br />
+                            Glass Galaxy<br />
+                            Dwarka, Nashik, Maharashtra<br />
+                            +91 866899322<br />
+                            kutubmerchant598@gmail.com
                         </div>
-
-                        <div style={{ textAlign: "right" }}>
-                            <div className="invoice-title">INVOICE</div>
-                            <p>Invoice No: {invoiceNumber}</p>
-                            <p>Date: {today}</p>
+                        <div className="pdf-to">
+                            <strong>TO:</strong><br />
+                            {customer.name || '____________________'}<br />
+                            {customer.address || '____________________'}<br />
+                            {customer.phone || '____________________'}
                         </div>
                     </div>
 
-                    <div className="section-box">
-                        <h3>From:</h3>
-                        <p>Glass Galaxy</p>
-                        <p>Dwarka, Nashik</p>
-                        <p>+91 866899322</p>
-                    </div>
-
-                    <div className="section-box">
-                        <h3>To:</h3>
-                        <p>{customer.name}</p>
-                        <p>{customer.address}</p>
-                        <p>{customer.phone}</p>
-                    </div>
-
-                    <table className="invoice-table">
+                    <table className="pdf-table">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Item</th>
                                 <th>Size</th>
                                 <th>Sq.ft</th>
-                                <th>Rate</th>
-                                <th>Total</th>
+                                <th>Rate (₹)</th>
+                                <th>Total (₹)</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             {items.map((row, index) => (
                                 <tr key={index}>
-                                    <td>{row.item}</td>
-                                    <td>{row.size}</td>
-                                    <td>{row.sqft}</td>
-                                    <td>{row.rate}</td>
-                                    <td>{row.total}</td>
+                                    <td>{index + 1}</td>
+                                    <td>{row.item || '______'}</td>
+                                    <td>{row.size || '______'}</td>
+                                    <td>{row.sqft || '0'}</td>
+                                    <td>{row.rate || '0'}</td>
+                                    <td>₹ {row.total}</td>
+                                </tr>
+                            ))}
+                            {items.length < 5 && [...Array(5 - items.length)].map((_, i) => (
+                                <tr key={`empty-${i}`}>
+                                    <td>{items.length + i + 1}</td>
+                                    <td>______</td>
+                                    <td>______</td>
+                                    <td>___</td>
+                                    <td>___</td>
+                                    <td>₹ 0</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
 
-                    <div className="total-section">
-                        Grand Total: ₹ {grandTotal}
+                    <div className="pdf-totals">
+                        <div className="pdf-subtotal">Subtotal: ₹ {subtotal.toFixed(2)}</div>
+                        <div className="pdf-tax">Tax (18% GST): ₹ {tax.toFixed(2)}</div>
+                        <div className="pdf-grand-total">Grand Total: ₹ {grandTotal.toFixed(2)}</div>
                     </div>
 
-                    <div className="signature">
-                        <div className="signature-box">Customer Signature</div>
-                        <div className="signature-box">Authorized Signature</div>
-                    </div>
-
-                    <div className="invoice-footer">
-                        +91 866899322 | Address: Dwarka Nashik |
-                        Email: kutubmerchant598@gmail.com
+                    <div className="pdf-signatures">
+                        <div className="pdf-signature">
+                            <div>GLASS GALAXY</div>
+                            <div className="signature-line"></div>
+                            <div>Customer Signature</div>
+                        </div>
+                        <div className="pdf-signature">
+                            <div className="signature-line"></div>
+                            <div>Authorized Signature</div>
+                        </div>
                     </div>
                 </div>
             </div>

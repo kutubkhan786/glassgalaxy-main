@@ -1,162 +1,353 @@
-/* Main Invoice Container */
-.invoice-container {
+/* Invoice Wrapper */
+.invoice-wrapper {
     max-width: 1000px;
-    margin: auto;
-    padding: 30px;
-    font-family: Arial, sans-serif;
-    background: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Header */
-.invoice-header {
+/* Action Buttons */
+.action-buttons {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
-}
-
-.company-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.company-logo {
-    width: 120px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.invoice-title {
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 3px;
-}
-
-.section-box {
+    justify-content: flex-end;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.section-box h3 {
-    margin-bottom: 8px;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-.section-box input {
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-    padding: 6px;
-    border: 1px solid #ccc;
-}
-
-/* Table */
-.invoice-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.invoice-table th {
-    background: #111;
-    color: white;
-    padding: 10px;
-    font-size: 14px;
-}
-
-.invoice-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-.invoice-table input {
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 4px;
-}
-
-/* Buttons */
-.action-buttons {
-    text-align: right;
-    margin: 20px auto;
-    max-width: 1000px;
-}
-
 .action-buttons button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background: black;
-    color: white;
+    padding: 12px 24px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.btn-primary {
+    background-color: #000;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #4CAF50;
+    color: white;
 }
 
 .action-buttons button:hover {
     opacity: 0.8;
 }
 
-/* Total Section */
-.total-section {
-    text-align: right;
-    margin-top: 20px;
-    font-size: 18px;
+/* Mobile Entry Container */
+.mobile-entry {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.invoice-header {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 15px;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.company-logo {
+    width: 60px;
+    height: auto;
+}
+
+.company-details h2 {
+    margin: 0;
+    font-size: 20px;
     font-weight: bold;
 }
 
-/* Signature */
-.signature {
-    margin-top: 60px;
+.tagline {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #666;
+}
+
+/* From and To Sections */
+.from-section,
+.to-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.from-section h3,
+.to-section h3,
+.items-section h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+}
+
+.from-section p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.to-section input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.to-section input:focus {
+    outline: none;
+    border-color: #000;
+}
+
+/* Items Section */
+.items-section {
+    margin-bottom: 20px;
+}
+
+.mobile-item-row {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.item-fields {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.item-fields:last-child {
+    margin-bottom: 0;
+}
+
+.item-fields input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.item-total {
+    min-width: 80px;
+    padding: 8px;
+    background: #e9e9e9;
+    border-radius: 4px;
+    text-align: right;
+    font-weight: 600;
+}
+
+/* Totals Section */
+.totals-section {
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.total-row {
     display: flex;
     justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #ccc;
+}
+
+.grand-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
+/* Signature Section */
+.signature-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
 }
 
 .signature-box {
-    width: 200px;
-    border-top: 1px solid #000;
-    text-align: center;
-    padding-top: 5px;
+    flex: 1;
 }
 
-/* Footer */
-.invoice-footer {
-    margin-top: 40px;
-    text-align: center;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-    font-size: 14px;
-    color: #555;
+.signature-box p {
+    margin: 0 0 5px;
+    font-size: 12px;
+    color: #666;
 }
 
-/* PDF Desktop Layout */
+.signature-line {
+    border-top: 2px solid #000;
+    height: 40px;
+}
+
+/* PDF Layout - Desktop Version */
 .pdf-layout {
     width: 1024px;
     background: white;
     padding: 40px;
+    font-family: 'Arial', sans-serif;
 }
 
-/* Hide PDF layout */
+.pdf-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.pdf-title {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.pdf-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.pdf-from-to {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+.pdf-from,
+.pdf-to {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.pdf-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.pdf-table th {
+    background: #000;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.pdf-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.pdf-totals {
+    text-align: right;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.pdf-subtotal,
+.pdf-tax {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.pdf-grand-total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #000;
+}
+
+.pdf-signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.pdf-signature {
+    width: 200px;
+    text-align: center;
+}
+
+.pdf-signature .signature-line {
+    margin: 10px 0;
+}
+
+/* Hide PDF layout by default */
 .hidden-pdf {
     position: absolute;
     left: -9999px;
     top: 0;
 }
 
-/* Mobile Responsive */
+/* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
-    .invoice-header {
-        flex-direction: column;
-        gap: 10px;
+    .invoice-wrapper {
+        padding: 10px;
     }
 
-    .signature {
+    .action-buttons {
         flex-direction: column;
-        gap: 40px;
     }
 
-    .invoice-container {
-        padding: 15px;
+    .action-buttons button {
+        width: 100%;
+    }
+
+    .company-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .item-fields {
+        flex-direction: column;
+    }
+
+    .item-fields input {
+        width: 100%;
+    }
+
+    .signature-section {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .signature-box {
+        width: 100%;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .mobile-item-row {
+        padding: 10px;
+    }
+
+    .total-row,
+    .grand-total {
+        font-size: 14px;
     }
 }
